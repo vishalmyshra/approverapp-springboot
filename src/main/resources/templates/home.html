@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome to Approver</title>
+</head>
+<body>
+<h3>Welcome to approver app developed by Vishal Mishra</h3>
+<h4>Select a Number:</h4>
+<form action="#" th:action="@{/}">
+    <select onchange="sayhello()" id="stopwatch" name="stopwatch">
+        <option th:each="number : ${#numbers.sequence(1, 10)}" th:value="${number}" th:text="${number}"></option>
+    </select>
+    <button type="submit">Submit</button>
+</form>
+
+<p id="counter"></p>
+<script>
+    function sayhello() {
+		clearInterval(timer);
+		let selectedValue = document.getElementById("stopwatch").value;
+		console.log(selectedValue);
+		timeLimit = selectedValue * 60;
+		startStopwatch(timeLimit);
+       }
+       
+		let timer;
+	   
+	   const couterOnPage = document.getElementById("counter");
+
+function startStopwatch(timeLimit) {
+    timer = setInterval(function() {
+        if (timeLimit <= 0) {
+            clearInterval(timer);
+            alert("Stopwatch reached" + `${timeLimit/60}` + " minute!");
+        } else {
+            console.log(timeLimit);
+            couterOnPage.innerHTML = timeLimit;
+            timeLimit--;
+        }
+    }, 1000); // Update every second (1000 milliseconds)
+}
+    
+</script>
+
+</body>
+</html>
